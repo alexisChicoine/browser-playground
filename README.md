@@ -13,7 +13,7 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 
 ## Demo video
 
-A screen recording walkthrough of every panel is in the [demo video](https://cursor.com/agents/bc-8a8243e2-c434-4241-9bf4-c5b58300318a/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fbrowser-playground-demo.mp4) (~100s). See also [docs/browser-tour.html](docs/browser-tour.html) for a written tour.
+A screen recording walkthrough of every panel is in the [demo video](docs/browser-playground-demo.mp4) (~100s). See also [docs/browser-tour.html](docs/browser-tour.html) for a written tour.
 
 ## What to try with @browser
 
