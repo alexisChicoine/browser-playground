@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Playground</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">◆</span>
+        <h1>Browser Playground</h1>
+      </div>
+      <nav aria-label="Main">
+        <a href="#home" data-nav="home" class="nav-link active">Home</a>
+        <a href="#forms" data-nav="forms" class="nav-link">Forms</a>
+        <a href="#network" data-nav="network" class="nav-link">Network</a>
+        <a href="#scroll" data-nav="scroll" class="nav-link">Scroll</a>
+      </nav>
+      <button type="button" id="theme-toggle" class="btn btn-ghost" aria-pressed="false">
+        Toggle theme
+      </button>
+    </header>
+
+    <main id="app">
+      <section id="home" class="panel active" data-panel="home">
+        <h2>Welcome</h2>
+        <p class="lead">
+          A small app for exercising Cursor’s browser tools: click, type, scroll,
+          screenshots, console logs, and network traffic.
+        </p>
+
+        <div class="card counter-card">
+          <h3>Counter</h3>
+          <p class="counter-value" id="counter-display" aria-live="polite">0</p>
+          <div class="btn-row">
+            <button type="button" id="counter-decrement" class="btn">−</button>
+            <button type="button" id="counter-reset" class="btn btn-ghost">Reset</button>
+            <button type="button" id="counter-increment" class="btn">+</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Console demos</h3>
+          <div class="btn-row">
+            <button type="button" id="log-info" class="btn btn-ghost">Log info</button>
+            <button type="button" id="log-warn" class="btn btn-ghost">Log warning</button>
+            <button type="button" id="log-error" class="btn btn-ghost">Log error</button>
+          </div>
+          <output id="console-hint" class="hint"
+            >Open DevTools or let the agent read browser console output.</output
+          >
+        </div>
+
+        <div class="card">
+          <h3>Modal</h3>
+          <button type="button" id="open-modal" class="btn">Open dialog</button>
+        </div>
+
+        <div class="card storage-card">
+          <h3>Session persistence</h3>
+          <p class="hint">Values survive browser sessions (per workspace).</p>
+          <label for="storage-note">Saved note</label>
+          <input type="text" id="storage-note" name="note" placeholder="Type something…" />
+          <p class="storage-status" id="storage-status"></p>
+        </div>
+      </section>
+
+      <section id="forms" class="panel" data-panel="forms" hidden>
+        <h2>Forms</h2>
+        <form id="contact-form" class="card form-card" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" />
+            <span class="error" id="name-error" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+            <span class="error" id="email-error" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <span class="error" id="message-error" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="field checkbox-field">
+            <input type="checkbox" id="subscribe" name="subscribe" />
+            <label for="subscribe">Subscribe to updates</label>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn">Submit</button>
+            <button type="reset" class="btn btn-ghost">Clear</button>
+          </div>
+          <p id="form-success" class="success" hidden role="status">Form submitted successfully.</p>
+        </form>
+
+        <div class="card">
+          <h3>Search</h3>
+          <label for="search" class="visually-hidden">Search items</label>
+          <input type="search" id="search" placeholder="Filter items…" />
+          <ul id="search-results" class="item-list" aria-live="polite"></ul>
+        </div>
+      </section>
+
+      <section id="network" class="panel" data-panel="network" hidden>
+        <h2>Network</h2>
+        <p class="lead">Trigger fetch requests the agent can inspect in network traffic.</p>
+        <div class="card">
+          <div class="btn-row">
+            <button type="button" id="fetch-success" class="btn">GET success</button>
+            <button type="button" id="fetch-delay" class="btn btn-ghost">GET slow (1s)</button>
+            <button type="button" id="fetch-fail" class="btn btn-ghost">GET 404</button>
+          </div>
+          <pre id="network-output" class="code-block" aria-live="polite">No requests yet.</pre>
+        </div>
+      </section>
+
+      <section id="scroll" class="panel" data-panel="scroll" hidden>
+        <h2>Scroll</h2>
+        <p class="lead">Long content for scroll and screenshot tests.</p>
+        <div id="scroll-target" class="scroll-banner" tabindex="-1">
+          <strong>Scroll target</strong> — agents can scroll here.
+        </div>
+        <div id="scroll-blocks" class="scroll-blocks"></div>
+        <button type="button" id="scroll-to-top" class="btn">Back to top</button>
+      </section>
+    </main>
+
+    <dialog id="demo-modal" aria-labelledby="modal-title">
+      <h2 id="modal-title">Demo dialog</h2>
+      <p>This modal is useful for click and focus testing.</p>
+      <form method="dialog">
+        <button type="submit" class="btn">Close</button>
+      </form>
+    </dialog>
+
+    <footer class="site-footer">
+      <p>Local dev: <code>npm run dev</code> → usually <code>http://localhost:5173</code></p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

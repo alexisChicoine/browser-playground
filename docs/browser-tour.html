@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Playground — Tour</title>
+    <style>
+      :root {
+        --bg: #f4f2ef;
+        --surface: #fff;
+        --text: #1a1a1a;
+        --muted: #5c5c5c;
+        --accent: #2563eb;
+        --border: #e2ddd6;
+        --radius: 12px;
+        --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 2rem;
+      }
+
+      header h1 {
+        margin: 0 0 0.25rem;
+        font-size: 1.5rem;
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 52rem;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 3rem;
+      }
+
+      article {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+
+      article h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.125rem;
+      }
+
+      article .meta {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+
+      article p {
+        margin: 0 0 1rem;
+      }
+
+      article ul {
+        margin: 0 0 1rem;
+        padding-left: 1.25rem;
+      }
+
+      article li {
+        margin-bottom: 0.35rem;
+      }
+
+      figure {
+        margin: 0;
+      }
+
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      figcaption {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Browser Playground — Cursor browser tour</h1>
+      <p>
+        Screenshots from an automated walkthrough of the playground app at
+        <code>http://localhost:5173</code>, using Cursor’s browser tools (click,
+        fill, navigate, scroll, screenshot).
+      </p>
+    </header>
+
+    <main>
+      <article>
+        <h2>1. Home — Counter</h2>
+        <p class="meta"><code>01-home-counter.png</code></p>
+        <p>
+          The <strong>Home</strong> tab with the interactive counter. The agent
+          clicked the <strong>+</strong> button; the value shows <strong>1</strong> in
+          blue (styled via <code>.counter-value</code>). Also visible: console demo
+          buttons, the modal trigger, and session persistence.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> click, screenshot</li>
+          <li><strong>Panel:</strong> Home</li>
+        </ul>
+        <figure>
+          <img src="screenshots/01-home-counter.png" alt="Home tab with counter at 1" />
+          <figcaption>Home — counter after increment</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>2. Home — Modal</h2>
+        <p class="meta"><code>02-home-modal.png</code></p>
+        <p>
+          After clicking <strong>Open dialog</strong>. The native
+          <code>&lt;dialog&gt;</code> may not always appear in the screenshot viewport,
+          but the click and focus state were exercised for modal testing.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> click</li>
+          <li><strong>Panel:</strong> Home</li>
+        </ul>
+        <figure>
+          <img src="screenshots/02-home-modal.png" alt="Home tab after opening dialog" />
+          <figcaption>Home — modal interaction</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>3. Forms — Before fill (nav quirk)</h2>
+        <p class="meta"><code>03-forms-empty.png</code></p>
+        <p>
+          Taken while switching to <strong>Forms</strong>. The URL changed to
+          <code>#forms</code> before hash-based panel switching was fixed, so the
+          screenshot still shows Home. This led to adding a
+          <code>hashchange</code> listener in <code>src/main.js</code>.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> click (nav), navigate</li>
+          <li><strong>Note:</strong> fixed in app — hash navigation now syncs panels</li>
+        </ul>
+        <figure>
+          <img src="screenshots/03-forms-empty.png" alt="Forms nav clicked but Home still visible" />
+          <figcaption>Navigation edge case (since fixed)</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>4. Forms — Filled &amp; search</h2>
+        <p class="meta"><code>03-forms-filled.png</code></p>
+        <p>
+          The <strong>Forms</strong> panel with fields filled via
+          <strong>browser_fill</strong>: name, email, message, and search filter
+          <code>gamma</code> narrowing the list to <strong>Gamma service</strong>.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> fill, type</li>
+          <li><strong>Panel:</strong> Forms</li>
+        </ul>
+        <figure>
+          <img src="screenshots/03-forms-filled.png" alt="Forms with filled fields and filtered search" />
+          <figcaption>Forms — filled inputs and live search</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>5. Forms — Submitted</h2>
+        <p class="meta"><code>04-forms-submitted.png</code></p>
+        <p>
+          After clicking <strong>Submit</strong> with valid data. Shows the full
+          contact form (Alex, demo@cursor.com, message text) ready for validation /
+          success messaging.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> click (submit)</li>
+          <li><strong>Panel:</strong> Forms</li>
+        </ul>
+        <figure>
+          <img src="screenshots/04-forms-submitted.png" alt="Forms with all fields populated" />
+          <figcaption>Forms — after submit click</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>6. Network — Fetch panel</h2>
+        <p class="meta"><code>05-network-fetch.png</code></p>
+        <p>
+          The <strong>Network</strong> tab with GET buttons for success, slow, and
+          404 responses. The agent clicked <strong>GET success</strong>; external
+          APIs may not complete inside the embedded browser, so the output can stay
+          at “No requests yet.”
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> click, network (when available)</li>
+          <li><strong>Panel:</strong> Network</li>
+        </ul>
+        <figure>
+          <img src="screenshots/05-network-fetch.png" alt="Network tab with fetch buttons" />
+          <figcaption>Network — fetch controls</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h2>7. Scroll — Long content</h2>
+        <p class="meta"><code>06-scroll-blocks.png</code></p>
+        <p>
+          The <strong>Scroll</strong> tab after scrolling down through numbered
+          blocks. Used to test <strong>browser_scroll</strong> and viewport /
+          full-page screenshots.
+        </p>
+        <ul>
+          <li><strong>Tools:</strong> scroll, screenshot</li>
+          <li><strong>Panel:</strong> Scroll</li>
+        </ul>
+        <figure>
+          <img src="screenshots/06-scroll-blocks.png" alt="Scroll tab showing block list" />
+          <figcaption>Scroll — scrolled content</figcaption>
+        </figure>
+      </article>
+    </main>
+
+    <footer>
+      <p>
+        Run the app: <code>npm run dev</code> · Open this page:
+        <code>docs/browser-tour.html</code> or
+        <a href="http://localhost:5173">localhost:5173</a>
+      </p>
+    </footer>
+  </body>
+</html>
