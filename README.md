@@ -11,6 +11,10 @@ npm run dev
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
+## Demo video
+
+A screen recording walkthrough of every panel is in [docs/browser-playground-demo.mp4](docs/browser-playground-demo.mp4) (~100s). See also [docs/browser-tour.html](docs/browser-tour.html) for a written tour.
+
 ## What to try with @browser
 
 | Area | Panel | Tools exercised |
